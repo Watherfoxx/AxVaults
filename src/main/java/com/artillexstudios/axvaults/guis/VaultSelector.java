@@ -10,6 +10,7 @@ import com.artillexstudios.axvaults.vaults.VaultPlayer;
 import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
 import dev.triumphteam.gui.guis.PaginatedGui;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -140,7 +141,9 @@ public class VaultSelector {
             consumer.accept(guiItem);
         } else {
             if (!CONFIG.getBoolean("show-locked-vaults", true)) {
-                consumer.accept(null);
+                // PaginatedGui compacts its page items, so a hidden vault still needs an
+                // invisible item to reserve its position in the selector.
+                consumer.accept(new GuiItem(Material.AIR));
                 return;
             }
 
