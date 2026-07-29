@@ -141,9 +141,7 @@ public class VaultSelector {
             consumer.accept(guiItem);
         } else {
             if (!CONFIG.getBoolean("show-locked-vaults", true)) {
-                // PaginatedGui compacts its page items, so a hidden vault still needs an
-                // invisible item to reserve its position in the selector.
-                consumer.accept(new GuiItem(Material.AIR));
+                consumer.accept(getHiddenLockedVaultItem(num, replacements));
                 return;
             }
 
@@ -159,5 +157,24 @@ public class VaultSelector {
             gui.update();
             consumer.accept(new GuiItem(it));
         }
+    }
+
+    private GuiItem getHiddenLockedVaultItem(int num, HashMap<String, String> replacements) {
+        final String path = "guis.selector.item-hidden-locked";
+        final Section section = MESSAGES.getSection(path);
+        if (section == null) return new GuiItem(Material.AIR);
+
+        final Material material = Material.matchMaterial(MESSAGES.getString(path + ".material", "AIR"));
+        if (material == null || material.isAir()) return new GuiItem(Material.AIR);
+
+        final ItemBuilder builder = ItemBuilder.create(section);
+        builder.setLore(MESSAGES.getStringList(path + ".lore"), replacements);
+        builder.setName(MESSAGES.getString(path + ".name"), replacements);
+
+        final ItemStack item = builder.get();
+        if (CONFIG.getInt("selector-item-amount-mode", 1) == 1)
+            item.setAmount(num % 64 == 0 ? 64 : num % 64);
+
+        return new GuiItem(item);
     }
 }

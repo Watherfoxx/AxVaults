@@ -139,6 +139,9 @@ admin-command-aliases:
   - "vaultadmin"
   - "vaultsadmin"
 
+# should the command sender receive the "Opened vault selector for X" confirmation?
+send-force-open-selector-message: true
+
 # should be plugin notify you if there is a new update?
 update-notifier:
   # if enabled, it will display the message in the console
@@ -151,4 +154,4 @@ update-notifier:
 debug: false
 
 # do not change this
-version: 10
+version: 11

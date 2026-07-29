@@ -40,6 +40,15 @@ guis:
         - " &7- &fYou have &#FF0000not unlocked &fthis vault yet!"
         - " "
         - "&#FF0000&l(!) &#FF0000Locked Vault"
+    # Used as a placeholder when show-locked-vaults is false.
+    # Keep the material set to AIR to leave hidden vault slots visually empty.
+    item-hidden-locked:
+      material: AIR
+      name: "&#FF0000&lVault #%num%"
+      custom-model-data: 0
+      lore:
+        - " "
+        - "&#FF0000&l(!) &#FF0000Locked Vault"
   item-picker:
     title: "&0Item Picker"
     defaultName: "&3Click to select"
@@ -127,4 +136,4 @@ commands:
 update-notifier: "&#BBFF88There is a new version of AxVaults available! &#DDDDDD(&#FFFFFFcurrent: &#FF0000%current% &#DDDDDD| &#FFFFFFlatest: &#00FF00%latest%&#DDDDDD)"
 
 # do not change this
-version: 10
+version: 11

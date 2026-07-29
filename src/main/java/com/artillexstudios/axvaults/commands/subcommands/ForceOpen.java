@@ -10,6 +10,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collections;
 import java.util.HashMap;
 
+import static com.artillexstudios.axvaults.AxVaults.CONFIG;
 import static com.artillexstudios.axvaults.AxVaults.MESSAGEUTILS;
 
 public enum ForceOpen {
@@ -34,7 +35,8 @@ public enum ForceOpen {
                 return;
             }
             new VaultSelector(player, vaultPlayer).open();
-            MESSAGEUTILS.sendLang(sender, "force-open", Collections.singletonMap("%player%", player.getName()));
+            if (CONFIG.getBoolean("send-force-open-selector-message", true))
+                MESSAGEUTILS.sendLang(sender, "force-open", Collections.singletonMap("%player%", player.getName()));
         });
 
     }
